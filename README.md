@@ -1,2 +1,2 @@
 # vim-config
-The config file of my vim
+The vimrc file of my vim
