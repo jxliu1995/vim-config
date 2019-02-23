@@ -1,3 +1,11 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" .vimrc --configuration of vim
+" Author: Jinxue Liu
+" E-mail:
+" Date: 2019/02/23
+" 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -46,17 +54,20 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-" Display settings
-colorscheme molokai
+" Basic settings
+colorscheme molokai           " set the colorscheme to molokai
 let g:molokai_original = 1
 let g:rehash256 = 1
 
-set lines=50
-set columns=180
-set nu     " Display row number
-set tabstop=4    " set tab width = 4
+set lines=50                  " set the height of the vim window
+set columns=180               " set the width of the vim window
+set number                    " show line number
+set tabstop=4                 " Number of spaces that a <Tab> in file counts for
 set backspace=2  " set backspace = 2
 set autoindent
 set cursorcolumn
 set cursorline
+syntax on 
+
+" auto completion
 
