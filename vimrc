@@ -54,7 +54,8 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-" Basic settings
+" ============================== Basic settings ==============================
+
 colorscheme molokai           " set the colorscheme to molokai
 let g:molokai_original = 1
 let g:rehash256 = 1
@@ -63,11 +64,80 @@ set lines=50                  " set the height of the vim window
 set columns=180               " set the width of the vim window
 set number                    " show line number
 set tabstop=4                 " Number of spaces that a <Tab> in file counts for
-set backspace=2  " set backspace = 2
+set shiftwidth=4              " Number of spaces to use for each step of (auto)indent
+set noexpandtab               " Do not expand a <Tab> as spaces
+set backspace=2               " Number of spaces that a <Back> in file counts for
 set autoindent
+set smartindent
+set cindent
+if has("autocmd")
+	autocmd BufRead,BufNewFile *.c,*.cc,*.cpp,*.h,*.py set expandtab
+endif
 set cursorcolumn
 set cursorline
+filetype plugin indent on 
 syntax on 
 
 " auto completion
+inoremap ( ()<LEFT>
+inoremap [ []<LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
+inoremap < <><LEFT>
+inoremap { {<CR>}<ESC>kA<CR>
 
+" ===========================================================================
+
+" ============================= Auto Set Comment ============================
+
+autocmd BufNewFile *.c,*.cc,*.cpp,*.h,*.hpp,*.py,*.sh exec ":call SetTitle()"
+
+" add comment
+func SetComment()
+	call setline(1,"/*================================================================")
+	call append(line("."),   "*   Copyright (C) ".strftime("%Y").". All rights reserved.")
+	call append(line(".")+1, "*   ")
+	call append(line(".")+2, "*   Name: ".expand("%:t"))
+	call append(line(".")+3, "*   Author: Jinxue Liu")
+	call append(line(".")+4, "*   Date: ".strftime("%Y/%m/%d"))
+	call append(line(".")+5, "*   Description: ")
+	call append(line(".")+6, "*")
+	call append(line(".")+7, "================================================================*/")
+	call append(line(".")+8, "")
+	call append(line(".")+9, "")
+endfunc
+" add comment for shell & python
+func SetComment_sh_py()
+	call setline(4, "#================================================================")
+	call setline(5, "#   Copyright (C) ".strftime("%Y").". All rights reserved.")
+	call setline(6, "#   ")
+	call setline(7, "#   Name: ".expand("%:t"))
+	call setline(8, "#   Author: Jinxue Liu")
+	call setline(9, "#   Date: ".strftime("%Y/%m/%d"))
+	call setline(10, "#   Description: ")
+	call setline(11, "#")
+	call setline(12, "#================================================================")
+	call setline(13, "")
+	call setline(14, "")
+endfunc
+
+func SetTitle()
+	if &filetype == 'python'
+		call setline(1, "\#!/usr/bin/python ")
+		call setline(2, "\#-*- coding=utf8 -*- ")
+		call setline(3, "")
+		call SetComment_sh_py()
+	
+	elseif &filetype == 'shell'
+		call setline(1, "\#!/bin/sh")
+		call setline(2, "")
+		call setline(3, "")
+		call SetComment_sh_py()
+
+	else
+		call SetComment()
+	endif
+endfunc
+autocmd BufNewFile * normal G
+
+" =====================================================================================
