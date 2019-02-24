@@ -140,4 +140,28 @@ func SetTitle()
 endfunc
 autocmd BufNewFile * normal G
 
-" =====================================================================================
+" ============================================================================
+
+" =========================== YouCompleteMe Settings =========================
+" Set path of the config file
+let g:ycm_global_ycm_extral_conf='~/.vim/data/ycm/.ycm_extra_conf.py'
+" Do not ask about loading certain .ycm_extral_conf.py files
+let g:ycm_confirm_extral_conf=0
+" Set the number of characters the user needs to type before completion suggestions are trigged 
+let g:ycm_min_num_of_chars_for_completion=2
+" Turn off the omnicompletion engines
+let g:ycm_cache_omnifunc=0
+" Turn on semantic completion 
+let g:ycm_seed_identifiers_with_syntax=1
+" Do not collect identifiers from strings and comments
+let g:ycm_collect_identifiers_from_comments_and_strings=0
+" Turn on completion in comment and string 
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+" Shield ycm in following file types
+let g:ycm_filetype_blacklist = {
+      \ 'text' : 1,
+	  \ 'markdown' : 1,
+	  \ 'tagbar' : 1,
+      \ 'nerdtree' : 1,
+      \}
