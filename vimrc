@@ -17,6 +17,8 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -143,8 +145,9 @@ autocmd BufNewFile * normal G
 " ============================================================================
 
 " =========================== YouCompleteMe Settings =========================
+
 " Set path of the config file
-let g:ycm_global_ycm_extral_conf='~/.vim/data/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf='~/.vim/data/ycm/.ycm_extra_conf.py'
 " Do not ask about loading certain .ycm_extral_conf.py files
 let g:ycm_confirm_extral_conf=0
 " Set the number of characters the user needs to type before completion suggestions are trigged 
@@ -165,3 +168,25 @@ let g:ycm_filetype_blacklist = {
 	  \ 'tagbar' : 1,
       \ 'nerdtree' : 1,
       \}
+
+" ===========================================================================
+
+" ========================== NerdTree Setting ===============================
+
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+
+" ==========================================================================
