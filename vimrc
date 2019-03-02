@@ -1,10 +1,15 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" .vimrc --configuration of vim
-" Author: Jinxue Liu
-" E-mail:
-" Date: 2019/02/23
-" 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" ============================================================================================ "
+"   
+"   Name: .vimrc
+"   Author: Jinxue Liu
+"   Date: 2019/03/02
+"   Description: 
+"
+" ============================================================================================ "
+
+
+" ====================================== Vundle ============================================== "
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -17,8 +22,6 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -39,6 +42,8 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " Begin my own plugins
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 " End my own plugins
 
 " All of your Plugins must be added before the following line
@@ -56,15 +61,30 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-" ============================== Basic settings ==============================
+" ============================================================================================ "
 
-colorscheme molokai           " set the colorscheme to molokai
-let g:molokai_original = 1
-let g:rehash256 = 1
+" =================================== Basic settings ========================================= "
 
+set nobackup                  " Do not backup
+set autowrite                 " Autowrite file  
+filetype plugin indent on 
+
+" size, colorscheme, syntax & Highlighting 
 set lines=50                  " set the height of the vim window
 set columns=180               " set the width of the vim window
 set number                    " show line number
+colorscheme molokai           " Set colorscheme to molokai 
+let g:molokai_original = 1
+let g:rehash256 = 1
+set cursorcolumn              " Highlighting column 
+set cursorline                " Highlighting line
+set ruler                     " Display cursor position status bar 
+set hlsearch                  " Highlighting search 
+set ignorecase                " Ignore case when search 
+syntax enable 
+syntax on 
+
+" tab settings 
 set tabstop=4                 " Number of spaces that a <Tab> in file counts for
 set shiftwidth=4              " Number of spaces to use for each step of (auto)indent
 set noexpandtab               " Do not expand a <Tab> as spaces
@@ -75,10 +95,9 @@ set cindent
 if has("autocmd")
 	autocmd BufRead,BufNewFile *.c,*.cc,*.cpp,*.h,*.py set expandtab
 endif
-set cursorcolumn
-set cursorline
-filetype plugin indent on 
-syntax on 
+
+" coding
+set encoding=utf-8
 
 " auto completion
 inoremap ( ()<LEFT>
@@ -88,63 +107,86 @@ inoremap ' ''<LEFT>
 inoremap < <><LEFT>
 inoremap { {<CR>}<ESC>kA<CR>
 
-" ===========================================================================
+" ============================================================================================ "
 
-" ============================= Auto Set Comment ============================
+" ================================== Auto Set Header ========================================= "
 
-autocmd BufNewFile *.c,*.cc,*.cpp,*.h,*.hpp,*.py,*.sh exec ":call SetTitle()"
+" add header for c
+function HeaderC()
+	call setline(1, "/*================================================================")
+	call setline(2, "*")
+	call setline(3, "*   Name: ".expand("%:t"))
+	call setline(4, "*   Author: Jinxue Liu")
+	call setline(5, "*   Date: ".strftime("%Y/%m/%d"))
+	call setline(6, "*   Description: ")
+	call setline(7, "*")
+	call setline(8, "================================================================*/")
+	call setline(9, "")
+	call setline(10, "")
+	call setline(11, "#include <stdio.h>")
+	normal G
+endfunction 
+autocmd BufNewFile *.c,*.h exec ":call HeaderC()"
 
-" add comment
-func SetComment()
-	call setline(1,"/*================================================================")
-	call append(line("."),   "*   Copyright (C) ".strftime("%Y").". All rights reserved.")
-	call append(line(".")+1, "*   ")
-	call append(line(".")+2, "*   Name: ".expand("%:t"))
-	call append(line(".")+3, "*   Author: Jinxue Liu")
-	call append(line(".")+4, "*   Date: ".strftime("%Y/%m/%d"))
-	call append(line(".")+5, "*   Description: ")
-	call append(line(".")+6, "*")
-	call append(line(".")+7, "================================================================*/")
-	call append(line(".")+8, "")
-	call append(line(".")+9, "")
-endfunc
-" add comment for shell & python
-func SetComment_sh_py()
+" add header for c++
+function HeaderCPP()
+	call setline(1, "/*================================================================")
+	call setline(2, "*")
+	call setline(3, "*   Name: ".expand("%:t"))
+	call setline(4, "*   Author: Jinxue Liu")
+	call setline(5, "*   Date: ".strftime("%Y/%m/%d"))
+	call setline(6, "*   Description: ")
+	call setline(7, "*")
+	call setline(8, "================================================================*/")
+	call setline(9, "")
+	call setline(10, "")
+	call setline(11, "#include <iostream>")
+	call setline(12, "using namespace std;")
+	normal G
+endfunction 
+autocmd BufNewFile *.cpp,*.cc,*.cxx,*.h,*.hpp exec ":call HeaderCPP()"
+
+" add header for python
+function HeaderPY()
+	call setline(1, "\#!/usr/bin/python ")
+	call setline(2, "\#-*- coding=utf8 -*- ")
+	call setline(3, "")
 	call setline(4, "#================================================================")
-	call setline(5, "#   Copyright (C) ".strftime("%Y").". All rights reserved.")
-	call setline(6, "#   ")
-	call setline(7, "#   Name: ".expand("%:t"))
-	call setline(8, "#   Author: Jinxue Liu")
-	call setline(9, "#   Date: ".strftime("%Y/%m/%d"))
-	call setline(10, "#   Description: ")
-	call setline(11, "#")
-	call setline(12, "#================================================================")
+	call setline(5, "#   ")
+	call setline(6, "#   Name: ".expand("%:t"))
+	call setline(7, "#   Author: Jinxue Liu")
+	call setline(8, "#   Date: ".strftime("%Y/%m/%d"))
+	call setline(9, "#   Description: ")
+	call setline(10, "#")
+	call setline(11, "#================================================================")
+	call setline(12, "")
 	call setline(13, "")
-	call setline(14, "")
-endfunc
+	normal G
+endfunction 
+autocmd BufNewFile *.py exec ":call HeaderPY()"
 
-func SetTitle()
-	if &filetype == 'python'
-		call setline(1, "\#!/usr/bin/python ")
-		call setline(2, "\#-*- coding=utf8 -*- ")
-		call setline(3, "")
-		call SetComment_sh_py()
+" add header for shell 
+function HeaderSH()
+	call setline(1, "\#!/bin/sh")
+	call setline(2, "")
+	call setline(3, "")
+	call setline(4, "#================================================================")
+	call setline(5, "#   ")
+	call setline(6, "#   Name: ".expand("%:t"))
+	call setline(7, "#   Author: Jinxue Liu")
+	call setline(8, "#   Date: ".strftime("%Y/%m/%d"))
+	call setline(9, "#   Description: ")
+	call setline(10, "#")
+	call setline(11, "#================================================================")
+	call setline(12, "")
+	call setline(13, "")
+	normal G
+endfunction 
+autocmd BufNewFile *.sh exec ":call HeaderSH()"
 	
-	elseif &filetype == 'shell'
-		call setline(1, "\#!/bin/sh")
-		call setline(2, "")
-		call setline(3, "")
-		call SetComment_sh_py()
+" ============================================================================================ "
 
-	else
-		call SetComment()
-	endif
-endfunc
-autocmd BufNewFile * normal G
-
-" ============================================================================
-
-" =========================== YouCompleteMe Settings =========================
+" ==================================== YouCompleteMe Settings ================================ " 
 
 " Set path of the config file
 let g:ycm_global_ycm_extra_conf='~/.vim/data/ycm/.ycm_extra_conf.py'
@@ -169,9 +211,9 @@ let g:ycm_filetype_blacklist = {
       \ 'nerdtree' : 1,
       \}
 
-" ===========================================================================
+" =========================================================================================== "
 
-" ========================== NerdTree Setting ===============================
+" =================================== NerdTree Setting ====================================== "
 
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
@@ -189,4 +231,4 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
-" ==========================================================================
+" =========================================================================================== "
