@@ -45,6 +45,10 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'vim-syntastic/syntastic'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'tpope/vim-surround'
 " End my own plugins
 
 " All of your Plugins must be added before the following line
@@ -259,3 +263,19 @@ let Tlist_Use_Right_Window = 1                         " Show window on right
 let Tlsit_Auto_Open = 0                                " Do not auto open
 
 " =========================================================================================== "
+
+
+" =================================== C++ highlighting ====================================== "
+
+let g:cpp_class_scope_highlight = 1                    " Enable highlighting of class scope 
+let g:cpp_member_variable_highlight = 1                " Enable highlighting of member variables 
+let g:cpp_class_decl_highlight = 1                     " Enable highlighting of class names in declarations 
+let g:cpp_concepts_highlight = 1                       " Highlight the keywords concepts 
+let g:cpp_no_function_highlight = 1                    " Enable highlighting of user defined functons
+
+" =========================================================================================== "
+
+let g:airline_theme = 'molokai'
+
+" =========================================================================================== "
+
