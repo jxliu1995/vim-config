@@ -4,7 +4,7 @@
 "   Name: .vimrc
 "   Author: Jinxue Liu
 "   Date: 2019/03/02
-"   Description: 
+"   Description: vim configuration 
 "
 " ============================================================================================ "
 
@@ -44,6 +44,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'vim-syntastic/syntastic'
 " End my own plugins
 
 " All of your Plugins must be added before the following line
@@ -71,6 +72,7 @@ filetype plugin indent on
 
 " size, colorscheme, syntax & Highlighting 
 set lines=50                  " set the height of the vim window
+set colorcolumn=81            " Highlighting 81th column
 set columns=180               " set the width of the vim window
 set number                    " show line number
 colorscheme molokai           " Set colorscheme to molokai 
@@ -230,5 +232,30 @@ let g:NERDTreeIndicatorMapCustom = {
     \ 'Ignored'   : '☒',
     \ "Unknown"   : "?"
     \ }
+
+" =========================================================================================== "
+
+" ===================================== Syntastic =========================================== "
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" =========================================================================================== "
+
+
+" ====================================== Taglist ============================================ "
+
+let Tlist_Ctags_Cmd = '/usr/bin/ctags'                 " ctags path 
+let Tlist_Show_One_FIle = 1                            " Only show current file 
+let Tlist_WinWidth = 40
+let Tlist_Exit_OnlyWindow = 1                          " Taglist is last window, exit vim 
+let Tlist_Use_Right_Window = 1                         " Show window on right 
+let Tlsit_Auto_Open = 0                                " Do not auto open
 
 " =========================================================================================== "
