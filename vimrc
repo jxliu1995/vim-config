@@ -49,6 +49,7 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-surround'
+Plugin 'majutsushi/tagbar'
 " End my own plugins
 
 " All of your Plugins must be added before the following line
@@ -249,18 +250,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
-" =========================================================================================== "
-
-
-" ====================================== Taglist ============================================ "
-
-let Tlist_Ctags_Cmd = '/usr/bin/ctags'                 " ctags path 
-let Tlist_Show_One_FIle = 1                            " Only show current file 
-let Tlist_WinWidth = 40
-let Tlist_Exit_OnlyWindow = 1                          " Taglist is last window, exit vim 
-let Tlist_Use_Right_Window = 1                         " Show window on right 
-let Tlsit_Auto_Open = 0                                " Do not auto open
 
 " =========================================================================================== "
 
