@@ -42,14 +42,14 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Begin my own plugins
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'vim-syntastic/syntastic'
+"Plugin 'scrooloose/nerdtree'
+"Plugin 'Xuyuanp/nerdtree-git-plugin'
+"Plugin 'vim-syntastic/syntastic'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'tpope/vim-surround'
-Plugin 'majutsushi/tagbar'
+"Plugin 'tpope/vim-surround'
+"Plugin 'majutsushi/tagbar'
 " End my own plugins
 
 " All of your Plugins must be added before the following line
@@ -76,13 +76,19 @@ set autowrite                 " Autowrite file
 filetype plugin indent on 
 
 " size, colorscheme, syntax & Highlighting 
-set lines=50                  " set the height of the vim window
+set lines=40                  " set the height of the vim window
+set columns=160               " set the width of the vim window
 set colorcolumn=81            " Highlighting 81th column
-set columns=180               " set the width of the vim window
 set number                    " show line number
-colorscheme molokai           " Set colorscheme to molokai 
-let g:molokai_original = 1
-let g:rehash256 = 1
+set background=dark
+if $COLORTERM == 'truecolor'
+    set termguicolors
+	colorscheme solarized-terminal
+else
+    set term=xterm
+    set t_Co=256
+    colorscheme solarized
+endif
 set cursorcolumn              " Highlighting column 
 set cursorline                " Highlighting line
 set ruler                     " Display cursor position status bar 
@@ -196,7 +202,7 @@ autocmd BufNewFile *.sh exec ":call HeaderSH()"
 " ==================================== YouCompleteMe Settings ================================ " 
 
 " Set path of the config file
-let g:ycm_global_ycm_extra_conf='~/.vim/data/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 " Do not ask about loading certain .ycm_extral_conf.py files
 let g:ycm_confirm_extral_conf=0
 " Set the number of characters the user needs to type before completion suggestions are trigged 
@@ -222,34 +228,34 @@ let g:ycm_filetype_blacklist = {
 
 " =================================== NerdTree Setting ====================================== "
 
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+"let g:NERDTreeDirArrowExpandable = '▸'
+"let g:NERDTreeDirArrowCollapsible = '▾'
 
-let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : "?"
-    \ }
+"let g:NERDTreeIndicatorMapCustom = {
+"    \ "Modified"  : "✹",
+"    \ "Staged"    : "✚",
+"    \ "Untracked" : "✭",
+"    \ "Renamed"   : "➜",
+"    \ "Unmerged"  : "═",
+"    \ "Deleted"   : "✖",
+"    \ "Dirty"     : "✗",
+"    \ "Clean"     : "✔︎",
+"    \ 'Ignored'   : '☒',
+"    \ "Unknown"   : "?"
+"    \ }
 
 " =========================================================================================== "
 
 " ===================================== Syntastic =========================================== "
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
 " =========================================================================================== "
 
@@ -264,7 +270,22 @@ let g:cpp_no_function_highlight = 1                    " Enable highlighting of 
 
 " =========================================================================================== "
 
-let g:airline_theme = 'molokai'
-
 " =========================================================================================== "
 
+if !exists('g:airline_symbols')
+let g:airline_symbols = {}
+endif
+let g:airline_theme = 'solarized'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇ '
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+
+" =========================================================================================== "
